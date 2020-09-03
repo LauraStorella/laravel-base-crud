@@ -3,7 +3,8 @@
 <ul>
   @foreach ($movies as $movie)
   <li>Titolo: {{ $movie->title }} 
-    <a href="{{ route('movies.show', $movie->id ) }}">Show details</a>  
+    <a href="{{ route('movies.show', $movie->id ) }}">Show details</a>
+    <a href="{{ route('movies.edit', $movie->id ) }}">Edit</a>  
   </li>
   @endforeach
 </ul>

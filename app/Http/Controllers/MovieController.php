@@ -38,7 +38,7 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        // // Validazione Form (array associativo)
+        // Validazione Form (array associativo)
         // $request->validate([
         //     'title' => 'required|max:255',
         //     'description' => 'required' ,
@@ -58,7 +58,12 @@ class MovieController extends Controller
         // $new_movie->fill($request_data);
         $saved = $new_movie->save();
 
-        // // dd($saved);
+        // dd($saved);
+
+        if ($saved) {
+            $saved_movie = Movie::orderBy('id', 'desc')->first();
+            return redirect()->route('movies.show', $saved_movie);
+        }
     }
 
     /**
@@ -78,9 +83,11 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Movie $movie)
     {
-        //
+        // Modidifica di record esistente
+        // dd($movie);
+        return view('edit', compact('movie'));
     }
 
     /**
@@ -90,9 +97,11 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Movie $movie)
     {
-        //
+        $data = $request->all();
+        $movie->update($data);
+        return redirect()->route('movies.show', $movie);
     }
 
     /**
