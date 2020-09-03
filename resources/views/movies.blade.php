@@ -6,7 +6,7 @@
     <a href="{{ route('movies.show', $movie->id ) }}">Show details</a>
     <a href="{{ route('movies.edit', $movie->id ) }}">Edit</a>  
 
-    <form action="{{ route('movies.destroy', $movie->id ) }}" method="post" style="display:inline-block">
+    <form action="{{ route('movies.destroy', $movie->id ) }}" method="post" style="display: inline-block">
       @csrf
       @method('DELETE')
       <input type="submit" value="Delete">
